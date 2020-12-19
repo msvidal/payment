@@ -1,0 +1,6 @@
+/Users/marcelovidal/Projetos/payment/src/test/java/com/nubank/payment/core/usecase/CreateTransactionUseCaseTest.java
+/Users/marcelovidal/Projetos/payment/src/test/java/com/nubank/payment/PaymentTestApplicationTests.java
+/Users/marcelovidal/Projetos/payment/src/test/java/com/nubank/payment/core/rest/TransactionControllerTest.java
+/Users/marcelovidal/Projetos/payment/src/test/java/com/nubank/payment/core/usecase/CreateAccountUseCaseTest.java
+/Users/marcelovidal/Projetos/payment/src/test/java/com/nubank/payment/core/rest/AccountControllerTest.java
+/Users/marcelovidal/Projetos/payment/src/test/java/com/nubank/payment/helper/ObjectMapperHelper.java

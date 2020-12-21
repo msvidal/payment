@@ -30,7 +30,7 @@ public class TransactionController {
             useCase.execute(TransactionRequest.toDomain(requestDTO),ACCOUNT_ID);
 
         } catch(ValidationException ex) {
-            return TransactionResponse.toRequest(requestDTO, ex.getValidationExceptions());
+            return TransactionResponse.toRequest(requestDTO, ex.getMessage());
         }
 
         return TransactionResponse.toRequest(requestDTO, null);

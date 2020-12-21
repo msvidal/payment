@@ -1,16 +1,14 @@
 package com.nubank.payment.entrypoint.dto;
 
 import com.nubank.payment.core.domain.Transaction;
-import com.nubank.payment.core.exception.ValidationException;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Getter
@@ -30,21 +28,20 @@ public class TransactionResponse {
             .build();
     }
 
-    public static TransactionResponse toRequest(TransactionRequest transactionRequest, List<ValidationException> validationExceptions) {
+    public static TransactionResponse toRequest(TransactionRequest transactionRequest, String message) {
         return TransactionResponse.builder()
             .merchant(transactionRequest.getMerchant())
             .amount(transactionRequest.getAmount())
             .time(transactionRequest.getTime())
-            .violations(toValidations(validationExceptions))
+            .violations(toValidations(message))
             .build();
     }
 
-    private static List<String> toValidations (List<ValidationException> validationExceptions) {
-        if(validationExceptions == null) {
+    private static List<String> toValidations (String message) {
+        if(message == null) {
             return Collections.EMPTY_LIST;
         }
 
-        return validationExceptions.stream()
-            .map(validationException -> validationException.getMessage()).collect(Collectors.toList());
+        return Arrays.asList(message);
     }
 }

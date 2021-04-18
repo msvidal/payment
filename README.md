@@ -6,10 +6,7 @@ docker run -p 8080:8080 docker.io/msvidal/spring-boot-docker:latest
 
 curl --location --request POST 'http://localhost:8080/v1/account' \
 --header 'Content-Type: application/json' \
---data-raw '{
-  "active-card": "true",
-  "available-limit": 10
-}'
+--data-raw '{ "active-card": "true", "available-limit": 10 }'
 
 curl --location --request POST 'http://localhost:8080/v1/transaction' \
 --header 'Content-Type: application/json' \

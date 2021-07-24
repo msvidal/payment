@@ -23,9 +23,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(MockitoExtension.class)
-public class TransactionControllerTest {
+class TransactionControllerTest {
 
-    public static final String BASE_URL = "/v1/transaction";
+    private static final String BASE_URL = "/v1/transaction";
 
     private MockMvc mockMvc;
 
@@ -58,7 +58,7 @@ public class TransactionControllerTest {
             .build();
     }
     @Test
-    public void when_createTransactionWithSuccess_expect_statusCreated() throws Exception {
+    void when_createTransactionWithSuccess_expect_statusCreated() throws Exception {
         when(useCase.execute(any(),any())).thenReturn(transaction);
 
         mockMvc.perform(post(BASE_URL)

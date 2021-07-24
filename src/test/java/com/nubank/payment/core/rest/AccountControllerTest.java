@@ -22,7 +22,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(MockitoExtension.class)
-public class AccountControllerTest {
+class AccountControllerTest {
 
     public static final String BASE_URL = "/v1/account";
 
@@ -57,7 +57,7 @@ public class AccountControllerTest {
     }
 
     @Test
-    public void when_createAccountWithSuccess_expect_statusCreated() throws Exception {
+    void when_createAccountWithSuccess_expect_statusCreated() throws Exception {
         when(useCase.execute(any())).thenReturn(account);
 
         mockMvc.perform(post(BASE_URL)

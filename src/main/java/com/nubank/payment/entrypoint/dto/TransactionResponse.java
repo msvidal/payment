@@ -39,7 +39,7 @@ public class TransactionResponse {
 
     private static List<String> toValidations (String message) {
         if(message == null) {
-            return Collections.EMPTY_LIST;
+            return Collections.emptyList();
         }
 
         return Arrays.asList(message);

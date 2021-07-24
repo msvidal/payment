@@ -22,6 +22,6 @@ public class TransactionPortImpl implements TransactionPort {
     }
 
     public List<Transaction> findAll() {
-        return repository.findAll().stream().map((transactionEntity -> TransactionEntity.toDomain(transactionEntity))).collect(Collectors.toList());
+        return repository.findAll().stream().map((TransactionEntity::toDomain)).collect(Collectors.toList());
     }
 }

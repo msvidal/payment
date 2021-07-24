@@ -23,7 +23,7 @@ public class AccountResponse {
     @JsonProperty("available-limit")
     private Integer availableLimit;
     @JsonProperty("violations")
-    private List<String> violations = Collections.EMPTY_LIST;
+    private List<String> violations = Collections.emptyList();
 
     public static Account toDomain(AccountResponse accountDto) {
         return Account.builder()
@@ -42,7 +42,7 @@ public class AccountResponse {
 
     private static List<String> toViolations(String message) {
         if(message == null)
-            return Collections.EMPTY_LIST;
+            return Collections.emptyList();
 
         return Arrays.asList(message);
     }

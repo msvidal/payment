@@ -20,7 +20,7 @@ public class TransactionController {
 
     private final CreateTransactionUseCase useCase;
 
-    private final Integer ACCOUNT_ID = 1;
+    private static final Integer ACCOUNT_ID = 1;
 
     @PostMapping
     @ResponseStatus(CREATED)

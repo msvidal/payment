@@ -1,7 +1,5 @@
 package com.nubank.payment.entrypoint.dto;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.*;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.nubank.payment.core.domain.Account;
 import lombok.AllArgsConstructor;
@@ -11,7 +9,6 @@ import lombok.Getter;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 @AllArgsConstructor
 @Getter

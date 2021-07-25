@@ -10,15 +10,14 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class CreateAccountUseCase {
 
-    private final AccountPort port;
-
+    private final AccountPort accountPort;
     private final AccountAlreadyInitializedValidation accountAlreadyInitialized;
 
     public Account execute(final Account account) {
 
         accountAlreadyInitialized.validate();
 
-        return port.save(account);
+        return accountPort.save(account);
     }
 
 }

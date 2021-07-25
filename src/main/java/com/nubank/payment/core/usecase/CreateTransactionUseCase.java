@@ -20,19 +20,12 @@ import java.util.Map;
 public class CreateTransactionUseCase {
 
     private final TransactionPort transactionPort;
-
     private final AccountPort accountPort;
-
     private final AccountNotInitializedValidation accountNotInitializedValidation;
-
     private final CardNotActiveValidation cardNotActiveValidation;
-
     private final InsufficienteLimitValidation insufficienteLimitValidation;
-
     private final HighFrequencyValidation highFrequencyValidation;
-
     private final DoubleTransactionValidation doubleTransactionValidation;
-
     private Map<String, ValidationException> validationExceptions;
 
     public Transaction execute(final Transaction transaction, final Integer accountID) {

@@ -1,9 +1,7 @@
 package com.nubank.payment.entrypoint.dto;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.*;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.nubank.payment.core.domain.Account;
+import com.nubank.payment.core.account.Account;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -11,7 +9,6 @@ import lombok.Getter;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 @AllArgsConstructor
 @Getter
@@ -32,7 +29,7 @@ public class AccountResponse {
             .build();
     }
 
-    public static AccountResponse toRequest(AccountRequest accountDto, String message) {
+    public static AccountResponse toRequest(AccountData accountDto, String message) {
         return AccountResponse.builder()
             .activeCard(accountDto.getActiveCard())
             .availableLimit(accountDto.getAvailableLimit())

@@ -1,8 +1,9 @@
 package com.nubank.payment.core.usecase;
 
-import com.nubank.payment.core.domain.Account;
-import com.nubank.payment.core.ports.AccountPort;
-import com.nubank.payment.core.validators.AccountAlreadyInitializedValidation;
+import com.nubank.payment.core.account.Account;
+import com.nubank.payment.core.account.AccountPort;
+import com.nubank.payment.core.account.AccountAlreadyInitializedValidation;
+import com.nubank.payment.core.account.CreateAccountUseCase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

@@ -1,9 +1,9 @@
 package com.nubank.payment.core.rest;
 
-import com.nubank.payment.core.domain.Account;
-import com.nubank.payment.core.usecase.CreateAccountUseCase;
-import com.nubank.payment.entrypoint.dto.AccountRequest;
+import com.nubank.payment.core.account.Account;
+import com.nubank.payment.core.account.CreateAccountUseCase;
 import com.nubank.payment.entrypoint.rest.AccountController;
+import com.nubank.payment.entrypoint.dto.AccountData;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -34,7 +34,7 @@ class AccountControllerTest {
     @Mock
     private CreateAccountUseCase useCase;
 
-    private AccountRequest accountRequest;
+    private AccountData accountRequest;
 
     private Account account;
 
@@ -44,7 +44,7 @@ class AccountControllerTest {
             .standaloneSetup(controller)
             .build();
 
-        accountRequest = AccountRequest.builder()
+        accountRequest = AccountData.builder()
             .activeCard(true)
             .availableLimit(100)
             .build();

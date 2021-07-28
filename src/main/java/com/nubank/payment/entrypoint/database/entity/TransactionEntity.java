@@ -1,6 +1,6 @@
 package com.nubank.payment.entrypoint.database.entity;
 
-import com.nubank.payment.core.domain.Transaction;
+import com.nubank.payment.core.transaction.Transaction;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

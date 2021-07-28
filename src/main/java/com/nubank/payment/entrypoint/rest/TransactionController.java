@@ -1,7 +1,7 @@
 package com.nubank.payment.entrypoint.rest;
 
-import com.nubank.payment.core.exception.ValidationException;
-import com.nubank.payment.core.usecase.CreateTransactionUseCase;
+import com.nubank.payment.core.ValidationException;
+import com.nubank.payment.core.transaction.CreateTransactionUseCase;
 import com.nubank.payment.entrypoint.dto.TransactionRequest;
 import com.nubank.payment.entrypoint.dto.TransactionResponse;
 import lombok.AllArgsConstructor;
@@ -27,7 +27,7 @@ public class TransactionController {
     public TransactionResponse create(@RequestBody TransactionRequest requestDTO) {
         try {
 
-            useCase.execute(TransactionRequest.toDomain(requestDTO),ACCOUNT_ID);
+            //useCase.execute(TransactionRequest.toDomain(requestDTO),ACCOUNT_ID);
 
         } catch(ValidationException ex) {
             return TransactionResponse.toRequest(requestDTO, ex.getMessage());

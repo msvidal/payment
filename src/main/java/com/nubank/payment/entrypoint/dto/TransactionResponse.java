@@ -1,6 +1,6 @@
 package com.nubank.payment.entrypoint.dto;
 
-import com.nubank.payment.core.domain.Transaction;
+import com.nubank.payment.core.transaction.Transaction;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -30,9 +30,9 @@ public class TransactionResponse {
 
     public static TransactionResponse toRequest(TransactionRequest transactionRequest, String message) {
         return TransactionResponse.builder()
-            .merchant(transactionRequest.getMerchant())
-            .amount(transactionRequest.getAmount())
-            .time(transactionRequest.getTime())
+            .merchant(transactionRequest.getTransactionData().getMerchant())
+            .amount(transactionRequest.getTransactionData().getAmount())
+            .time(transactionRequest.getTransactionData().getTime())
             .violations(toValidations(message))
             .build();
     }

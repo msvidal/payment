@@ -1,14 +1,8 @@
-package com.nubank.payment.core.usecase;
+package com.nubank.payment.core.transaction;
 
-import com.nubank.payment.core.domain.Transaction;
-import com.nubank.payment.core.exception.ValidationException;
-import com.nubank.payment.core.ports.AccountPort;
-import com.nubank.payment.core.ports.TransactionPort;
-import com.nubank.payment.core.validators.AccountNotInitializedValidation;
-import com.nubank.payment.core.validators.CardNotActiveValidation;
-import com.nubank.payment.core.validators.DoubleTransactionValidation;
-import com.nubank.payment.core.validators.HighFrequencyValidation;
-import com.nubank.payment.core.validators.InsufficienteLimitValidation;
+import com.nubank.payment.core.ValidationException;
+import com.nubank.payment.core.account.AccountPort;
+import com.nubank.payment.core.account.AccountNotInitializedValidation;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -35,11 +29,11 @@ public class CreateTransactionUseCase {
 
     private Map<String, ValidationException> validationExceptions;
 
-    public Transaction execute(final Transaction transaction, final Integer accountID) {
+    public Transaction execute(final Transaction transaction) {
 
         accountNotInitializedValidation.validate();
 
-        var account = accountPort.find(accountID);
+        var account = accountPort.find();
 
         cardNotActiveValidation.validate(account);
 

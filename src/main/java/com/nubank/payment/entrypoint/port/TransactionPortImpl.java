@@ -1,8 +1,8 @@
 package com.nubank.payment.entrypoint.port;
 
-import com.nubank.payment.core.domain.Transaction;
-import com.nubank.payment.core.ports.TransactionPort;
-import com.nubank.payment.entrypoint.database.TransactionRepository;
+import com.nubank.payment.core.transaction.Transaction;
+import com.nubank.payment.core.transaction.TransactionPort;
+import com.nubank.payment.entrypoint.database.repository.TransactionRepository;
 import com.nubank.payment.entrypoint.database.entity.TransactionEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

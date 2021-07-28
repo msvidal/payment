@@ -1,7 +1,6 @@
-package com.nubank.payment.core.validators;
+package com.nubank.payment.core.transaction;
 
-import com.nubank.payment.core.domain.Transaction;
-import com.nubank.payment.core.exception.ValidationException;
+import com.nubank.payment.core.ValidationException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

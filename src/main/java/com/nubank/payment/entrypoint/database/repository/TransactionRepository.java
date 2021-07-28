@@ -1,4 +1,4 @@
-package com.nubank.payment.entrypoint.database;
+package com.nubank.payment.entrypoint.database.repository;
 
 import com.nubank.payment.entrypoint.database.entity.TransactionEntity;
 import org.springframework.data.jpa.repository.JpaRepository;

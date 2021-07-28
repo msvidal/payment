@@ -1,13 +1,12 @@
 package com.nubank.payment.entrypoint.dto;
 
-import com.nubank.payment.core.domain.Transaction;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
 
 @Builder
 @Getter
@@ -16,15 +15,15 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class TransactionRequest {
 
-    private String merchant;
-    private Integer amount;
-    private LocalDateTime time;
 
-    public static Transaction toDomain(TransactionRequest transactionRequest) {
-        return Transaction.builder()
-            .amount(transactionRequest.getAmount())
-            .merchant(transactionRequest.getMerchant())
-            .time(transactionRequest.getTime())
-            .build();
+    @JsonProperty("transaction")
+    private TransactionData transactionData;
+
+    @Override
+    public String toString() {
+        return "TransactionRequest{" +
+            "transactionData=" + transactionData +
+            '}';
     }
+
 }

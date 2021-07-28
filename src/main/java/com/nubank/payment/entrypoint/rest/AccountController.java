@@ -1,8 +1,8 @@
 package com.nubank.payment.entrypoint.rest;
 
-import com.nubank.payment.core.exception.ValidationException;
-import com.nubank.payment.core.usecase.CreateAccountUseCase;
-import com.nubank.payment.entrypoint.dto.AccountRequest;
+import com.nubank.payment.core.ValidationException;
+import com.nubank.payment.core.account.CreateAccountUseCase;
+import com.nubank.payment.entrypoint.dto.AccountData;
 import com.nubank.payment.entrypoint.dto.AccountResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,10 +22,10 @@ public class AccountController {
 
     @PostMapping
     @ResponseStatus(CREATED)
-    public AccountResponse create(@RequestBody AccountRequest requestDTO) {
+    public AccountResponse create(@RequestBody AccountData requestDTO) {
         try {
 
-            useCase.execute(AccountRequest.toDomain(requestDTO));
+            useCase.execute(AccountData.toDomain(requestDTO));
 
         } catch(ValidationException ex) {
             return AccountResponse.toRequest(requestDTO, ex.getMessage());

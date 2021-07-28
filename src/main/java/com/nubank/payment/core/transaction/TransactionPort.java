@@ -1,6 +1,4 @@
-package com.nubank.payment.core.ports;
-
-import com.nubank.payment.core.domain.Transaction;
+package com.nubank.payment.core.transaction;
 
 import java.util.List;
 

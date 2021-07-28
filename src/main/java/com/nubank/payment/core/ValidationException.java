@@ -1,4 +1,4 @@
-package com.nubank.payment.core.exception;
+package com.nubank.payment.core;
 
 public class ValidationException  extends RuntimeException {
 

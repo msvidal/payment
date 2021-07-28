@@ -20,13 +20,13 @@ public class AccountEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer Id;
+    private Integer id;
     private Boolean activeCard;
     private Integer availableLimit;
 
     public static AccountEntity from(Account account) {
         return AccountEntity.builder()
-            .Id(account.getId())
+            .id(account.getId())
             .activeCard(account.getActiveCard())
             .availableLimit(account.getAvailableLimit())
             .build();

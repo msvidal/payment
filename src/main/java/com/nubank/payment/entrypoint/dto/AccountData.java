@@ -24,13 +24,4 @@ public class AccountData {
             .availableLimit(accountDto.getAvailableLimit())
             .build();
     }
-
-    @Override
-    public String toString() {
-        return "AccountData{" +
-            "activeCard=" + activeCard +
-            ", availableLimit=" + availableLimit +
-            '}';
-    }
-
 }

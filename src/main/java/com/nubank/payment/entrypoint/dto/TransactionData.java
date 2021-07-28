@@ -5,13 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 import java.time.LocalDateTime;
 
 @Builder
 @Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class TransactionData {
@@ -27,14 +24,4 @@ public class TransactionData {
             .time(transactionRequest.getTime())
             .build();
     }
-
-    @Override
-    public String toString() {
-        return "TransactionData{" +
-            "merchant='" + merchant + '\'' +
-            ", amount=" + amount +
-            ", time=" + time +
-            '}';
-    }
-
 }

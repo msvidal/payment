@@ -21,7 +21,7 @@ public class TransactionEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer Id;
+    private Integer id;
     private String merchant;
     private Integer amount;
     private LocalDateTime time;

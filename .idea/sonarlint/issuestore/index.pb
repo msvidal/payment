@@ -1,29 +1,13 @@
 
 ;
 payment.iml,e/0/e0ccdc1c136fece67f70dddea513b0abf92c3219
-7
-pom.xml,4/4/442292b8a7efeabbe4cc176709b833b1792140ec
-‚
-Rsrc/main/java/com/nubank/payment/core/account/AccountNotInitializedValidation.java,c/f/cf8bae6bf24ac7e2450138b2a97e1fa1933494c1
-~
-Nsrc/main/java/com/nubank/payment/core/transaction/CardNotActiveValidation.java,3/7/373920626fe5926a2296d0759934a7237b99591d
-‚
-Rsrc/main/java/com/nubank/payment/core/transaction/DoubleTransactionValidation.java,9/5/95d57a88a69a241ae7ea1f9928109e700e3e4956
-~
-Nsrc/main/java/com/nubank/payment/core/transaction/HighFrequencyValidation.java,d/9/d9819d17270421d9477815419c39efd00badbe5d
-ƒ
-Ssrc/main/java/com/nubank/payment/core/transaction/InsufficienteLimitValidation.java,6/d/6dbf3d7c20c55927ef27e326c8cba370823254e5
-v
-Fsrc/main/java/com/nubank/payment/core/transaction/TransactionPort.java,a/b/abb034940cd7166cef3806e78e4d62c32fc178ac
-‚
-Rsrc/main/java/com/nubank/payment/entrypoint/database/entity/TransactionEntity.java,4/4/44f96f1e9807edbdacaabd7e0c3cde02466eef95
-†
-Vsrc/main/java/com/nubank/payment/entrypoint/database/repository/AccountRepository.java,5/8/5840964dd687070747f32a41d47529aeb6b378af
-Š
-Zsrc/main/java/com/nubank/payment/entrypoint/database/repository/TransactionRepository.java,e/5/e548902758109aad28f7572a949373f7e283ef12
-†
-Vsrc/main/java/com/nubank/payment/core/account/AccountAlreadyInitializedValidation.java,e/9/e97e60c4545d4e198f573c345ed760aa3c7b080a
 n
 >src/main/java/com/nubank/payment/core/ValidationException.java,5/8/586bc288d7d206fe1fb2af7b9f7668b1459209af
 9
 	README.md,8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
+y
+Isrc/test/java/com/nubank/payment/core/rest/TransactionControllerTest.java,9/3/93e3ee99275c6325552fa31a2f64fa73e5f16776
+w
+Gsrc/main/java/com/nubank/payment/entrypoint/rest/AccountController.java,e/c/ecbffc122113adee71e815919b4c755de0eb421a
+{
+Ksrc/main/java/com/nubank/payment/entrypoint/rest/TransactionController.java,d/9/d95d3775e4d0faaa5e35bcd659c2c6ad2aecbbc6

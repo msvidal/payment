@@ -15,11 +15,4 @@ public class AccountRequest {
     @JsonProperty("account")
     private AccountData accountData;
 
-    @Override
-    public String toString() {
-        return "AccountRequest{" +
-            "accountData=" + accountData +
-            '}';
-    }
-
 }

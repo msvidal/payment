@@ -19,11 +19,25 @@ public class AccountPortImpl implements AccountPort {
 
     @Override
     public Account save(final Account account) {
-        return AccountEntity.toDomain(repository.save(AccountEntity.from(account)));
+
+        var accountEntity = AccountEntity.builder()
+            .id(account.getId())
+            .activeCard(account.getActiveCard())
+            .availableLimit(account.getAvailableLimit())
+            .build();
+
+        accountEntity = repository.save(accountEntity);
+
+        return Account.builder()
+            .id(accountEntity.getId())
+            .activeCard(accountEntity.getActiveCard())
+            .availableLimit(accountEntity.getAvailableLimit())
+            .build();
     }
 
     @Override
     public boolean checkIfAccountAlreadyExists() {
+
         return repository.count() > 0;
     }
 
@@ -31,10 +45,16 @@ public class AccountPortImpl implements AccountPort {
     public Account find() {
         try {
 
-            return AccountEntity.toDomain(repository.findById(ID_ACCOUNT).orElse(null));
+            var accountEntity = repository.findById(ID_ACCOUNT). orElse(null);
+
+            return Account.builder()
+            .id(accountEntity.getId())
+            .activeCard(accountEntity.getActiveCard())
+            .availableLimit(accountEntity.getAvailableLimit())
+            .build();
 
         } catch (EntityNotFoundException ex) {
-            ex.printStackTrace();
+            // omitindo o stacktrace para nao poluir o console
         }
         return null;
     }

@@ -1,15 +1,13 @@
 package com.nubank.payment;
 
 import com.nubank.payment.core.ValidationException;
+import com.nubank.payment.core.account.Account;
 import com.nubank.payment.core.account.CreateAccountUseCase;
 import com.nubank.payment.core.transaction.CreateTransactionUseCase;
+import com.nubank.payment.core.transaction.Transaction;
 import com.nubank.payment.entrypoint.Utils;
-import com.nubank.payment.entrypoint.dto.AccountData;
 import com.nubank.payment.entrypoint.dto.AccountRequest;
-import com.nubank.payment.entrypoint.dto.AccountResponse;
-import com.nubank.payment.entrypoint.dto.TransactionData;
 import com.nubank.payment.entrypoint.dto.TransactionRequest;
-import com.nubank.payment.entrypoint.dto.TransactionResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -34,15 +32,15 @@ public class PaymentRunner  implements CommandLineRunner {
         process();
     }
 
-    private void process() {
+    private void process() throws IOException {
 
         List<String> lines = processFile();
 
         processAccounts(lines);
+        processTransactions(lines);
 
         System.out.println("===========================================================================");
-
-        processTransactions(lines);
+        System.in.read();
     }
 
     private void processAccounts(final List<String> lines) {
@@ -51,7 +49,12 @@ public class PaymentRunner  implements CommandLineRunner {
         for (AccountRequest accountRequest : listAccounts){
             try {
 
-                createAccountUseCase.execute(AccountData.toDomain(accountRequest.getAccountData()));
+                var account = Account.builder()
+                    .activeCard(accountRequest.getAccountData().getActiveCard())
+                    .availableLimit(accountRequest.getAccountData().getAvailableLimit())
+                    .build();
+
+                createAccountUseCase.execute(account);
 
             } catch(ValidationException ex) {
                 //AccountResponse.toRequest(null, ex.getMessage());
@@ -68,7 +71,13 @@ public class PaymentRunner  implements CommandLineRunner {
         for (TransactionRequest transactionRequest : listTransactions){
             try {
 
-                createTransactionUseCase.execute(TransactionData.toDomain(transactionRequest.getTransactionData()));
+                var transaction = Transaction.builder()
+                    .amount(transactionRequest.getTransactionData().getAmount())
+                    .merchant(transactionRequest.getTransactionData().getMerchant())
+                    .time(transactionRequest.getTransactionData().getTime())
+                    .build();
+
+                createTransactionUseCase.execute(transaction);
 
             } catch(ValidationException ex) {
                 //TransactionResponse.toRequest(null, ex.getMessage());

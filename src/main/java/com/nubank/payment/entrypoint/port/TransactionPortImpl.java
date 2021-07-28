@@ -18,10 +18,29 @@ public class TransactionPortImpl implements TransactionPort {
 
     @Override
     public Transaction authorize(final Transaction transaction) {
-        return TransactionEntity.toDomain(repository.save(TransactionEntity.from(transaction)));
+
+        var transactioEntity = TransactionEntity.builder()
+            .merchant(transaction.getMerchant())
+            .amount(transaction.getAmount())
+            .time(transaction.getTime())
+            .build();
+
+        transactioEntity = repository.save(transactioEntity);
+
+        return Transaction.builder()
+            .merchant(transactioEntity.getMerchant())
+            .amount(transactioEntity.getAmount())
+            .time(transactioEntity.getTime())
+            .build();
     }
 
     public List<Transaction> findAll() {
-        return repository.findAll().stream().map((TransactionEntity::toDomain)).collect(Collectors.toList());
+        return repository.findAll().stream().map(transactionEntity -> {
+            return Transaction.builder()
+                .merchant(transactionEntity.getMerchant())
+                .amount(transactionEntity.getAmount())
+                .time(transactionEntity.getTime())
+                .build();
+        }).collect(Collectors.toList());
     }
 }

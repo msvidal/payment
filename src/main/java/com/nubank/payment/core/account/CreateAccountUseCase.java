@@ -11,9 +11,9 @@ public class CreateAccountUseCase {
 
     private final AccountAlreadyInitializedValidation accountAlreadyInitialized;
 
-    public Account execute(final Account account) {
+    public Account execute(Account account) {
 
-        accountAlreadyInitialized.validate();
+        accountAlreadyInitialized.validate(account);
 
         return port.save(account);
     }

@@ -10,9 +10,9 @@ public class AccountAlreadyInitializedValidation {
 
     private final AccountPort port;
 
-    public void validate() {
+    public void validate(Account account) {
         if(port.checkIfAccountAlreadyExists()){
-            throw new ValidationException("account-already-initialized");
+            throw new ValidationException(account,"account-already-initialized");
         }
     }
 

@@ -1,6 +1,7 @@
 package com.nubank.payment.core.transaction;
 
 import com.nubank.payment.core.ValidationException;
+import com.nubank.payment.core.account.Account;
 import com.nubank.payment.core.account.AccountPort;
 import com.nubank.payment.core.account.AccountNotInitializedValidation;
 import lombok.AllArgsConstructor;
@@ -29,7 +30,7 @@ public class CreateTransactionUseCase {
 
     private Map<String, ValidationException> validationExceptions;
 
-    public Transaction execute(final Transaction transaction) {
+    public Account execute(final Transaction transaction) {
 
         accountNotInitializedValidation.validate();
 
@@ -41,14 +42,16 @@ public class CreateTransactionUseCase {
 
         var transactions = transactionPort.findAll();
 
-        highFrequencyValidation.validate(transactions);
+        highFrequencyValidation.validate(account,transactions);
 
-        doubleTransactionValidation.validate(transaction,transactions);
+        doubleTransactionValidation.validate(account,transaction,transactions);
 
         account.setAvailableLimit(account.getAvailableLimit() - transaction.getAmount());
 
-        accountPort.save(account);
+        account = accountPort.save(account);
 
-        return transactionPort.authorize(transaction);
+        transactionPort.authorize(transaction);
+
+        return account;
     }
 }

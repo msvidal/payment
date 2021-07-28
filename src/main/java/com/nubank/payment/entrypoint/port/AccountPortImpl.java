@@ -37,7 +37,6 @@ public class AccountPortImpl implements AccountPort {
 
     @Override
     public boolean checkIfAccountAlreadyExists() {
-
         return repository.count() > 0;
     }
 

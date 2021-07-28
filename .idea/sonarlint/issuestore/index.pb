@@ -1,8 +1,6 @@
 
 ;
 payment.iml,e/0/e0ccdc1c136fece67f70dddea513b0abf92c3219
-n
->src/main/java/com/nubank/payment/core/ValidationException.java,5/8/586bc288d7d206fe1fb2af7b9f7668b1459209af
 9
 	README.md,8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
 y

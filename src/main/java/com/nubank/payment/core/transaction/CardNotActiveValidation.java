@@ -10,10 +10,8 @@ import org.springframework.stereotype.Service;
 public class CardNotActiveValidation {
 
     public void validate(Account account) {
-        if (account == null) return;
-
         if (Boolean.FALSE.equals(account.getActiveCard())){
-            throw new ValidationException("card-not-active");
+            throw new ValidationException(account,"card-not-active");
         }
     }
 }

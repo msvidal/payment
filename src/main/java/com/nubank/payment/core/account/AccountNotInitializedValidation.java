@@ -12,7 +12,7 @@ public class AccountNotInitializedValidation {
 
     public void validate() {
         if(!port.checkIfAccountAlreadyExists()){
-            throw new ValidationException("account-not-initialized");
+            throw new ValidationException(null,"account-not-initialized");
         }
     }
 }

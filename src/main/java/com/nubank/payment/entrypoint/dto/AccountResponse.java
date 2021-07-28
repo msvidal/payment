@@ -6,41 +6,35 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 @AllArgsConstructor
 @Getter
 @Builder
-public class AccountResponse {
+public class AccountResponse extends PaymentResponse {
 
-    @JsonProperty("active-card")
-    private Boolean activeCard;
-    @JsonProperty("available-limit")
-    private Integer availableLimit;
+    @JsonProperty("account")
+    private AccountResponseData data;
+
     @JsonProperty("violations")
     private List<String> violations = Collections.emptyList();
 
-    public static Account toDomain(AccountResponse accountDto) {
-        return Account.builder()
-            .activeCard(accountDto.getActiveCard())
-            .availableLimit(accountDto.getAvailableLimit())
-            .build();
+    public static void toJsonFormat(Account account) {
+        parseJson(AccountResponse.builder()
+            .violations(toValidations(null))
+            .data(AccountResponseData.builder()
+                .activeCard(account.getActiveCard())
+                .availableLimit(account.getAvailableLimit())
+                .build()).build());
     }
 
-    public static AccountResponse toRequest(AccountData accountDto, String message) {
-        return AccountResponse.builder()
-            .activeCard(accountDto.getActiveCard())
-            .availableLimit(accountDto.getAvailableLimit())
-            .violations(toViolations(message))
-            .build();
-    }
-
-    private static List<String> toViolations(String message) {
-        if(message == null)
-            return Collections.emptyList();
-
-        return Arrays.asList(message);
+    public static void toJsonFormat(Account account, String message) {
+        parseJson(AccountResponse.builder()
+            .violations(toValidations(message))
+            .data(account != null ? AccountResponseData.builder()
+                .activeCard(account.getActiveCard())
+                .availableLimit(account.getAvailableLimit())
+                .build() : null).build());
     }
 }

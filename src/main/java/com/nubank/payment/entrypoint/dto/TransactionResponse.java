@@ -6,42 +6,33 @@ import lombok.Builder;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 @AllArgsConstructor
 @Getter
 @Builder
-public class TransactionResponse {
+public class TransactionResponse extends PaymentResponse {
 
     private String merchant;
     private Integer amount;
     private LocalDateTime time;
     private List<String> violations;
 
-    public static Transaction toDomain(TransactionResponse transactionResponse) {
-        return Transaction.builder()
-            .merchant(transactionResponse.getMerchant())
-            .amount(transactionResponse.getAmount())
-            .time(transactionResponse.getTime())
-            .build();
+    public static void toJsonFormat(Transaction transaction) {
+        parseJson(TransactionResponse.builder()
+            .merchant(transaction.getMerchant())
+            .amount(transaction.getAmount())
+            .time(transaction.getTime())
+            .violations(toValidations(null))
+            .build());
     }
 
-    public static TransactionResponse toRequest(TransactionRequest transactionRequest, String message) {
-        return TransactionResponse.builder()
-            .merchant(transactionRequest.getTransactionData().getMerchant())
-            .amount(transactionRequest.getTransactionData().getAmount())
-            .time(transactionRequest.getTransactionData().getTime())
+    public static void toJsonFormat(Transaction transaction, String message) {
+         parseJson(TransactionResponse.builder()
+            .merchant(transaction.getMerchant())
+            .amount(transaction.getAmount())
+            .time(transaction.getTime())
             .violations(toValidations(message))
-            .build();
-    }
-
-    private static List<String> toValidations (String message) {
-        if(message == null) {
-            return Collections.emptyList();
-        }
-
-        return Arrays.asList(message);
+            .build());
     }
 }

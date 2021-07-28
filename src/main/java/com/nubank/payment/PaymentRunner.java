@@ -7,7 +7,9 @@ import com.nubank.payment.core.transaction.CreateTransactionUseCase;
 import com.nubank.payment.core.transaction.Transaction;
 import com.nubank.payment.entrypoint.Utils;
 import com.nubank.payment.entrypoint.dto.AccountRequest;
+import com.nubank.payment.entrypoint.dto.AccountResponse;
 import com.nubank.payment.entrypoint.dto.TransactionRequest;
+import com.nubank.payment.entrypoint.dto.TransactionResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -36,56 +38,12 @@ public class PaymentRunner  implements CommandLineRunner {
 
         List<String> lines = processFile();
 
-        processAccounts(lines);
-        processTransactions(lines);
+        System.out.println("===========================================================================");
+
+        processOperations(lines);
 
         System.out.println("===========================================================================");
-        System.in.read();
-    }
-
-    private void processAccounts(final List<String> lines) {
-        var listAccounts = lines.stream().filter(linha -> linha.contains("account")).map(Utils::getAccount).collect(Collectors.toList());
-
-        for (AccountRequest accountRequest : listAccounts){
-            try {
-
-                var account = Account.builder()
-                    .activeCard(accountRequest.getAccountData().getActiveCard())
-                    .availableLimit(accountRequest.getAccountData().getAvailableLimit())
-                    .build();
-
-                createAccountUseCase.execute(account);
-
-            } catch(ValidationException ex) {
-                //AccountResponse.toRequest(null, ex.getMessage());
-            }
-
-            //AccountResponse.toRequest(null, null);
-
-        }
-    }
-
-    private void processTransactions(final List<String> lines) {
-        var listTransactions = lines.stream().filter(linha -> linha.contains("transaction")).map(Utils::getTransaction).collect(Collectors.toList());
-
-        for (TransactionRequest transactionRequest : listTransactions){
-            try {
-
-                var transaction = Transaction.builder()
-                    .amount(transactionRequest.getTransactionData().getAmount())
-                    .merchant(transactionRequest.getTransactionData().getMerchant())
-                    .time(transactionRequest.getTransactionData().getTime())
-                    .build();
-
-                createTransactionUseCase.execute(transaction);
-
-            } catch(ValidationException ex) {
-                //TransactionResponse.toRequest(null, ex.getMessage());
-            }
-
-            //TransactionResponse.toRequest(null, null);
-
-        }
+        //System.in.read();
     }
 
     private List<String> processFile() {
@@ -97,5 +55,45 @@ public class PaymentRunner  implements CommandLineRunner {
             e.printStackTrace();
         }
         return lines;
+    }
+
+    private void processOperations(final List<String> lines) {
+
+        for (String line : lines){
+            if(line.contains("account")){
+                try {
+                    var accountRequest = Utils.getAccount(line);
+                    var account = Account.builder()
+                        .activeCard(accountRequest.getAccountData().getActiveCard())
+                        .availableLimit(accountRequest.getAccountData().getAvailableLimit())
+                        .build();
+
+                    account = createAccountUseCase.execute(account);
+                    AccountResponse.toJsonFormat(account);
+
+                } catch(ValidationException ex) {
+                    AccountResponse.toJsonFormat(ex.getAccount(),ex.getMessage());
+                }
+            }
+
+            if(line.contains("transaction")){
+                try {
+                    var transactionRequest = Utils.getTransaction(line);
+                    var transaction = Transaction.builder()
+                        .amount(transactionRequest.getTransactionData().getAmount())
+                        .merchant(transactionRequest.getTransactionData().getMerchant())
+                        .time(transactionRequest.getTransactionData().getTime())
+                        .build();
+
+                    var account = createTransactionUseCase.execute(transaction);
+
+                    AccountResponse.toJsonFormat(account);
+
+                } catch(ValidationException ex) {
+                    AccountResponse.toJsonFormat(ex.getAccount(), ex.getMessage());
+                }
+            }
+
+        }
     }
 }

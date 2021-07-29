@@ -39,12 +39,15 @@ public class CreateTransactionUseCase {
 
         doubleTransactionValidation.validate(transaction);
 
-        if(account != null && ValidationFactory.getInstance().getValidations().size() == 0) {
-            account.setAvailableLimit(account.getAvailableLimit() - transaction.getAmount());
-            account = accountPort.save(account);
-        }
+        if(ValidationFactory.getInstance().getValidations().size() == 0) {
 
-        transactionPort.authorize(transaction);
+            if (account != null) {
+                account.setAvailableLimit(account.getAvailableLimit() - transaction.getAmount());
+                account = accountPort.save(account);
+            }
+
+            transactionPort.authorize(transaction);
+        }
 
         return account;
     }

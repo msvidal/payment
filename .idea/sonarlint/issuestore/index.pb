@@ -17,5 +17,3 @@ p
 @src/main/java/com/nubank/payment/entrypoint/dto/AccountData.java,8/b/8b2d4e49adcd743b56ecf2b3f5f817a35fd75e8b
 n
 >src/main/java/com/nubank/payment/core/ValidationException.java,5/8/586bc288d7d206fe1fb2af7b9f7668b1459209af
-h
-8src/main/java/com/nubank/payment/PaymentApplication.java,9/a/9a80cc2c54342c37fb73d923445149727f0bd699

@@ -21,8 +21,8 @@ public class HighFrequencyValidation {
         var transactions = transactionPort.findAll();
 
         var filterCount = transactions.stream().filter(transaction1 -> {
-            return getDateTimeInterval(transaction.getTime()).isBefore(transaction.getTime()) &&
-                transaction.getTime().isAfter(getDateTimeInterval(transaction.getTime()));
+            return getDateTimeInterval(transaction.getTime()).isBefore(transaction1.getTime()) &&
+                transaction1.getTime().isAfter(getDateTimeInterval(transaction.getTime()));
         }).count();
 
         if(filterCount == MAX_HIGH_FREQUENCY){

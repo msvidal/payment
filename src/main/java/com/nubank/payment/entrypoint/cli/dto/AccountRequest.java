@@ -1,4 +1,4 @@
-package com.nubank.payment.entrypoint.dto;
+package com.nubank.payment.entrypoint.cli.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -10,11 +10,9 @@ import lombok.NoArgsConstructor;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class AccountData {
+public class AccountRequest {
 
-    @JsonProperty("active-card")
-    private Boolean activeCard;
-    @JsonProperty("available-limit")
-    private Integer availableLimit;
+    @JsonProperty("account")
+    private AccountData accountData;
 
 }

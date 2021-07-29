@@ -1,11 +1,11 @@
-package com.nubank.payment;
+package com.nubank.payment.entrypoint.cli;
 
 import com.nubank.payment.core.account.Account;
 import com.nubank.payment.core.account.CreateAccountUseCase;
 import com.nubank.payment.core.transaction.CreateTransactionUseCase;
 import com.nubank.payment.core.transaction.Transaction;
 import com.nubank.payment.entrypoint.Utils;
-import com.nubank.payment.entrypoint.dto.AccountResponse;
+import com.nubank.payment.entrypoint.cli.dto.AccountResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 
 @Component
 @AllArgsConstructor
-public class PaymentRunner  implements CommandLineRunner {
+public class PaymentRunner implements CommandLineRunner {
 
     private final CreateAccountUseCase createAccountUseCase;
 

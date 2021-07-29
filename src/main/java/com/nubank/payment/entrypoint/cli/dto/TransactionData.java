@@ -1,4 +1,4 @@
-package com.nubank.payment.entrypoint.dto;
+package com.nubank.payment.entrypoint.cli.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -4,6 +4,7 @@ import com.nubank.payment.core.ValidationFactory;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
 @Service
@@ -20,13 +21,16 @@ public class HighFrequencyValidation {
         var transactions = transactionPort.findAll();
 
         var filterCount = transactions.stream().filter(transaction1 -> {
-            var dateTimeInterval = transaction.getTime().minus(MAX_INTERVAL_FREQUENCY_MINUTE, ChronoUnit.MINUTES);
-            return dateTimeInterval.isBefore(transaction.getTime()) &&
-                transaction.getTime().isAfter(dateTimeInterval);
+            return getDateTimeInterval(transaction.getTime()).isBefore(transaction.getTime()) &&
+                transaction.getTime().isAfter(getDateTimeInterval(transaction.getTime()));
         }).count();
 
         if(filterCount == MAX_HIGH_FREQUENCY){
             ValidationFactory.getInstance().addValidation("high-frequency-small-interval");
         }
+    }
+
+    private LocalDateTime getDateTimeInterval(LocalDateTime localDateTime){
+        return localDateTime.minus(MAX_INTERVAL_FREQUENCY_MINUTE, ChronoUnit.MINUTES);
     }
 }

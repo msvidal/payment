@@ -1,13 +1,14 @@
 package com.nubank.payment.core.transaction;
 
-import com.nubank.payment.core.ValidationException;
+import com.nubank.payment.core.ValidationFactory;
 import com.nubank.payment.core.account.Account;
 import com.nubank.payment.core.account.AccountPort;
 import com.nubank.payment.core.account.AccountNotInitializedValidation;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Map;
+import java.util.Collections;
+import java.util.List;
 
 
 @Service
@@ -28,8 +29,6 @@ public class CreateTransactionUseCase {
 
     private final DoubleTransactionValidation doubleTransactionValidation;
 
-    private Map<String, ValidationException> validationExceptions;
-
     public Account execute(final Transaction transaction) {
 
         accountNotInitializedValidation.validate();
@@ -42,13 +41,14 @@ public class CreateTransactionUseCase {
 
         var transactions = transactionPort.findAll();
 
-        highFrequencyValidation.validate(account,transactions);
+        highFrequencyValidation.validate(transactions);
 
-        doubleTransactionValidation.validate(account,transaction,transactions);
+        doubleTransactionValidation.validate(transaction,transactions);
 
-        account.setAvailableLimit(account.getAvailableLimit() - transaction.getAmount());
-
-        account = accountPort.save(account);
+        if(account != null && ValidationFactory.getInstance().getValidations().size() == 0) {
+            account.setAvailableLimit(account.getAvailableLimit() - transaction.getAmount());
+            account = accountPort.save(account);
+        }
 
         transactionPort.authorize(transaction);
 

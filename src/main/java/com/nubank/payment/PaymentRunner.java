@@ -1,15 +1,11 @@
 package com.nubank.payment;
 
-import com.nubank.payment.core.ValidationException;
 import com.nubank.payment.core.account.Account;
 import com.nubank.payment.core.account.CreateAccountUseCase;
 import com.nubank.payment.core.transaction.CreateTransactionUseCase;
 import com.nubank.payment.core.transaction.Transaction;
 import com.nubank.payment.entrypoint.Utils;
-import com.nubank.payment.entrypoint.dto.AccountRequest;
 import com.nubank.payment.entrypoint.dto.AccountResponse;
-import com.nubank.payment.entrypoint.dto.TransactionRequest;
-import com.nubank.payment.entrypoint.dto.TransactionResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -61,39 +57,29 @@ public class PaymentRunner  implements CommandLineRunner {
 
         for (String line : lines){
             if(line.contains("account")){
-                try {
-                    var accountRequest = Utils.getAccount(line);
-                    var account = Account.builder()
-                        .activeCard(accountRequest.getAccountData().getActiveCard())
-                        .availableLimit(accountRequest.getAccountData().getAvailableLimit())
-                        .build();
+                var accountRequest = Utils.getAccount(line);
+                var account = Account.builder()
+                    .activeCard(accountRequest.getAccountData().getActiveCard())
+                    .availableLimit(accountRequest.getAccountData().getAvailableLimit())
+                    .build();
 
-                    account = createAccountUseCase.execute(account);
-                    AccountResponse.toJsonFormat(account);
+                account = createAccountUseCase.execute(account);
+                AccountResponse.parseJson(account);
 
-                } catch(ValidationException ex) {
-                    AccountResponse.toJsonFormat(ex.getAccount(),ex.getMessage());
-                }
             }
 
             if(line.contains("transaction")){
-                try {
-                    var transactionRequest = Utils.getTransaction(line);
-                    var transaction = Transaction.builder()
-                        .amount(transactionRequest.getTransactionData().getAmount())
-                        .merchant(transactionRequest.getTransactionData().getMerchant())
-                        .time(transactionRequest.getTransactionData().getTime())
-                        .build();
+                var transactionRequest = Utils.getTransaction(line);
+                var transaction = Transaction.builder()
+                    .amount(transactionRequest.getTransactionData().getAmount())
+                    .merchant(transactionRequest.getTransactionData().getMerchant())
+                    .time(transactionRequest.getTransactionData().getTime())
+                    .build();
 
-                    var account = createTransactionUseCase.execute(transaction);
+                var account = createTransactionUseCase.execute(transaction);
 
-                    AccountResponse.toJsonFormat(account);
-
-                } catch(ValidationException ex) {
-                    AccountResponse.toJsonFormat(ex.getAccount(), ex.getMessage());
-                }
+                AccountResponse.parseJson(account);
             }
-
         }
     }
 }

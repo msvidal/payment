@@ -43,14 +43,15 @@ public class AccountPortImpl implements AccountPort {
     @Override
     public Account find() {
         try {
+            var accountEntity = repository.findById(ID_ACCOUNT).orElse(null);
 
-            var accountEntity = repository.findById(ID_ACCOUNT). orElse(null);
-
-            return Account.builder()
-            .id(accountEntity.getId())
-            .activeCard(accountEntity.getActiveCard())
-            .availableLimit(accountEntity.getAvailableLimit())
-            .build();
+            if(accountEntity != null){
+                return Account.builder()
+                    .id(accountEntity.getId())
+                    .activeCard(accountEntity.getActiveCard())
+                    .availableLimit(accountEntity.getAvailableLimit())
+                    .build();
+            }
 
         } catch (EntityNotFoundException ex) {
             // omitindo o stacktrace para nao poluir o console

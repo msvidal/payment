@@ -1,7 +1,7 @@
 package com.nubank.payment.core.transaction;
 
+import com.nubank.payment.core.ValidationFactory;
 import com.nubank.payment.core.account.Account;
-import com.nubank.payment.core.ValidationException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +13,7 @@ public class InsufficienteLimitValidation {
         if (account == null) return;
 
         if(transaction.getAmount() > account.getAvailableLimit()) {
-            throw new ValidationException(account,"insufficient-limit");
+            ValidationFactory.getInstance().addValidation("insufficient-limit");
         }
     }
 }

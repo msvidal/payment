@@ -29,7 +29,7 @@ public class CreateTransactionUseCase {
 
     private final DoubleTransactionValidation doubleTransactionValidation;
 
-    public Account execute(final Transaction transaction) {
+    public Account execute(Transaction transaction) {
 
         accountNotInitializedValidation.validate();
 
@@ -39,11 +39,9 @@ public class CreateTransactionUseCase {
 
         insufficienteLimitValidation.validate(account,transaction);
 
-        var transactions = transactionPort.findAll();
+        highFrequencyValidation.validate(transaction);
 
-        highFrequencyValidation.validate(transactions);
-
-        doubleTransactionValidation.validate(transaction,transactions);
+        doubleTransactionValidation.validate(transaction);
 
         if(account != null && ValidationFactory.getInstance().getValidations().size() == 0) {
             account.setAvailableLimit(account.getAvailableLimit() - transaction.getAmount());

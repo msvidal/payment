@@ -13,7 +13,12 @@ public class HighFrequencyValidation {
     private static final Integer MAX_HIGH_FREQUENCY = 3;
     private static final Integer MAX_INTERVAL_FREQUENCY_MINUTE = 2;
 
-    public void validate(List<Transaction> transactions) {
+    private final TransactionPort transactionPort;
+
+    public void validate(Transaction transaction) {
+
+        var transactions = transactionPort.findAll();
+
         if(transactions.stream().filter(transaction1 ->
             transaction1.validateHighFrequency(MAX_INTERVAL_FREQUENCY_MINUTE)).count() > MAX_HIGH_FREQUENCY){
             ValidationFactory.getInstance().addValidation("high-frequency-small-interval");

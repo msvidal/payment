@@ -24,9 +24,4 @@ public class Transaction {
     public boolean validateHighFrequency(Integer maxInterval){
         return validateFrequency(maxInterval);
     }
-
-    public boolean validateDoubleTransaction(String merchant, Integer amount, Integer maxInterval){
-        return (this.merchant.equalsIgnoreCase(merchant) && this.amount.equals(amount))
-                    && validateFrequency(maxInterval);
-    }
 }

@@ -1,18 +1,19 @@
 package com.nubank.payment.core.transaction;
 
 import com.nubank.payment.core.ValidationFactory;
-import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Service;
+import com.nubank.payment.entrypoint.port.TransactionPortImpl;
 
 import java.time.Duration;
 
-@Service
-@AllArgsConstructor
 public class DoubleTransactionValidation {
 
     private static final Integer MAX_INTERVAL_TRANSACTION_MINUTE = 2;
 
     private final TransactionPort transactionPort;
+
+    public DoubleTransactionValidation() {
+        this.transactionPort = new TransactionPortImpl();
+    }
 
     public void validate(Transaction transaction) {
 

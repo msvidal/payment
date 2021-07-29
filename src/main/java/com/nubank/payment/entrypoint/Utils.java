@@ -3,8 +3,8 @@ package com.nubank.payment.entrypoint;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.nubank.payment.entrypoint.cli.dto.AccountRequest;
-import com.nubank.payment.entrypoint.cli.dto.TransactionRequest;
+import com.nubank.payment.entrypoint.dto.AccountRequest;
+import com.nubank.payment.entrypoint.dto.TransactionRequest;
 
 public class Utils {
 

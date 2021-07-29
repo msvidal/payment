@@ -1,10 +1,12 @@
 package com.nubank.payment.entrypoint.database.repository;
 
 import com.nubank.payment.entrypoint.database.entity.TransactionEntity;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import java.util.List;
 
-@Repository
-public interface TransactionRepository extends JpaRepository<TransactionEntity, Integer> {
+public interface TransactionRepository {
+
+    TransactionEntity save(TransactionEntity transactioEntity);
+
+    List<TransactionEntity> findAll();
 
 }

@@ -1,15 +1,53 @@
 package com.nubank.payment;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import com.nubank.payment.core.account.Account;
+import com.nubank.payment.core.account.CreateAccountUseCase;
+import com.nubank.payment.core.transaction.CreateTransactionUseCase;
+import com.nubank.payment.core.transaction.Transaction;
+import com.nubank.payment.entrypoint.Utils;
+import com.nubank.payment.entrypoint.dto.AccountResponse;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.List;
+import java.util.stream.Collectors;
 
-@SpringBootApplication
 public class PaymentApplication {
 
 	public static void main(String[] args) throws IOException {
-		SpringApplication.run(PaymentApplication.class, args);
+		try (BufferedReader in = new BufferedReader(new InputStreamReader(System.in))) {
+			process(in.lines().collect(Collectors.toList()));
+		}
+	}
 
+	public static void process(List<String> lines) {
+
+		for (String line : lines){
+			if(line.contains("account")){
+				var accountRequest = Utils.getAccount(line);
+				var account = Account.builder()
+					.activeCard(accountRequest.getAccountData().getActiveCard())
+					.availableLimit(accountRequest.getAccountData().getAvailableLimit())
+					.build();
+
+				account = new CreateAccountUseCase().execute(account);
+				AccountResponse.parseJson(account);
+
+			}
+
+			if(line.contains("transaction")){
+				var transactionRequest = Utils.getTransaction(line);
+				var transaction = Transaction.builder()
+					.amount(transactionRequest.getTransactionData().getAmount())
+					.merchant(transactionRequest.getTransactionData().getMerchant())
+					.time(transactionRequest.getTransactionData().getTime())
+					.build();
+
+				var account = new CreateTransactionUseCase().execute(transaction);
+
+				AccountResponse.parseJson(account);
+			}
+		}
 	}
 }

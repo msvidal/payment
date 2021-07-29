@@ -1,20 +1,21 @@
 package com.nubank.payment.core.transaction;
 
 import com.nubank.payment.core.ValidationFactory;
-import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Service;
+import com.nubank.payment.entrypoint.port.TransactionPortImpl;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
-@Service
-@AllArgsConstructor
 public class HighFrequencyValidation {
 
     private static final Integer MAX_HIGH_FREQUENCY = 3;
     private static final Integer MAX_INTERVAL_FREQUENCY_MINUTE = 2;
 
     private final TransactionPort transactionPort;
+
+    public HighFrequencyValidation() {
+        this.transactionPort = new TransactionPortImpl();
+    }
 
     public void validate(Transaction transaction) {
 

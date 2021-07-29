@@ -1,4 +1,4 @@
-package com.nubank.payment.entrypoint.cli.dto;
+package com.nubank.payment.entrypoint.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;

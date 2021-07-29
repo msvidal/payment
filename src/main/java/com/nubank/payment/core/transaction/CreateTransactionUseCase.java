@@ -4,11 +4,9 @@ import com.nubank.payment.core.ValidationFactory;
 import com.nubank.payment.core.account.Account;
 import com.nubank.payment.core.account.AccountPort;
 import com.nubank.payment.core.account.AccountNotInitializedValidation;
-import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Service;
+import com.nubank.payment.entrypoint.port.AccountPortImpl;
+import com.nubank.payment.entrypoint.port.TransactionPortImpl;
 
-@Service
-@AllArgsConstructor
 public class CreateTransactionUseCase {
 
     private final TransactionPort transactionPort;
@@ -24,6 +22,16 @@ public class CreateTransactionUseCase {
     private final HighFrequencyValidation highFrequencyValidation;
 
     private final DoubleTransactionValidation doubleTransactionValidation;
+
+    public CreateTransactionUseCase() {
+        this.transactionPort = new TransactionPortImpl();
+        this.accountPort = new AccountPortImpl();
+        this.accountNotInitializedValidation = new AccountNotInitializedValidation();
+        this.cardNotActiveValidation = new CardNotActiveValidation();
+        this.insufficienteLimitValidation = new InsufficienteLimitValidation();
+        this.highFrequencyValidation = new HighFrequencyValidation();
+        this.doubleTransactionValidation = new DoubleTransactionValidation();
+    }
 
     public Account execute(Transaction transaction) {
 

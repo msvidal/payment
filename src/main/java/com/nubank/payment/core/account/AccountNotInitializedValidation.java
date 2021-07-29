@@ -1,17 +1,18 @@
 package com.nubank.payment.core.account;
 
 import com.nubank.payment.core.ValidationFactory;
-import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Service;
+import com.nubank.payment.entrypoint.port.AccountPortImpl;
 
-@Service
-@AllArgsConstructor
 public class AccountNotInitializedValidation {
 
-    private final AccountPort port;
+    private final AccountPort accountPort;
+
+    public AccountNotInitializedValidation() {
+        this.accountPort = new AccountPortImpl();
+    }
 
     public void validate() {
-        if(!port.checkIfAccountAlreadyExists()){
+        if(!accountPort.checkIfAccountAlreadyExists()){
             ValidationFactory.getInstance().addValidation("account-not-initialized");
         }
     }

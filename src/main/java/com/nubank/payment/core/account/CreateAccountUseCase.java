@@ -1,14 +1,15 @@
 package com.nubank.payment.core.account;
 
 import com.nubank.payment.core.ValidationFactory;
-import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Service;
+import com.nubank.payment.entrypoint.port.AccountPortImpl;
 
-@Service
-@AllArgsConstructor
 public class CreateAccountUseCase {
 
     private final AccountPort accountPort;
+
+    public CreateAccountUseCase() {
+        this.accountPort = new AccountPortImpl();
+    }
 
     public Account execute(Account account) {
 

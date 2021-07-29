@@ -17,11 +17,4 @@ public class Transaction {
     private Integer amount;
     private LocalDateTime time;
 
-    private boolean validateFrequency(Integer maxInterval){
-        return LocalDateTime.now().isAfter(time) && time.isBefore(LocalDateTime.now().plusMinutes(maxInterval));
-    }
-
-    public boolean validateHighFrequency(Integer maxInterval){
-        return validateFrequency(maxInterval);
-    }
 }

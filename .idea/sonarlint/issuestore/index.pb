@@ -9,8 +9,6 @@ Vsrc/main/java/com/nubank/payment/entrypoint/database/repository/AccountReposito
 Zsrc/main/java/com/nubank/payment/entrypoint/database/repository/TransactionRepository.java,e/5/e548902758109aad28f7572a949373f7e283ef12
 j
 :src/main/java/com/nubank/payment/core/account/Account.java,5/b/5b0992cf941a506c625a115aeb7249f4e0da1bc3
-t
-Dsrc/main/java/com/nubank/payment/entrypoint/dto/TransactionData.java,7/f/7fca2e9cff3ac070a24c9eb88246aeab4579de0e
 s
 Csrc/main/java/com/nubank/payment/entrypoint/dto/AccountRequest.java,6/9/691a777209f22d8950ca0613d2fec05f97bb94f5
 f

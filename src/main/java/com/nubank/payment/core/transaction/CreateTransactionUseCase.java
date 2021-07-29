@@ -7,10 +7,6 @@ import com.nubank.payment.core.account.AccountNotInitializedValidation;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
-import java.util.List;
-
-
 @Service
 @AllArgsConstructor
 public class CreateTransactionUseCase {

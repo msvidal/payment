@@ -8,17 +8,17 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class CreateAccountUseCase {
 
-    private final AccountPort port;
+    private final AccountPort accountPort;
 
     public Account execute(Account account) {
 
-        var accountExist = port.find();
+        var accountExist = accountPort.find();
 
         if (accountExist != null) {
             ValidationFactory.getInstance().addValidation("account-already-initialized");
             return accountExist;
         }
 
-        return port.save(account);
+        return accountPort.save(account);
     }
 }

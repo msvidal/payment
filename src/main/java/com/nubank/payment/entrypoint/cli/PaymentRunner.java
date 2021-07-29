@@ -39,7 +39,8 @@ public class PaymentRunner implements CommandLineRunner {
         processOperations(lines);
 
         System.out.println("===========================================================================");
-        //System.in.read();
+        System.out.println("Pressione alguma tecla e enter para finalizar");
+        System.in.read();
     }
 
     private List<String> processFile() {

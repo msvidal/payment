@@ -16,7 +16,7 @@ public class AccountPortImpl implements AccountPort {
     }
 
     @Override
-    public Account save(final Account account) {
+    public Account save(Account account) {
 
         var accountEntity = AccountEntity.builder()
             .id(account.getId())

@@ -20,18 +20,18 @@ public class TransactionPortImpl implements TransactionPort {
     @Override
     public Transaction authorize(final Transaction transaction) {
 
-        var transactioEntity = TransactionEntity.builder()
+        var transactionEntity = TransactionEntity.builder()
             .merchant(transaction.getMerchant())
             .amount(transaction.getAmount())
             .time(transaction.getTime())
             .build();
 
-        transactioEntity = transactionRepository.save(transactioEntity);
+        transactionEntity = transactionRepository.save(transactionEntity);
 
         return Transaction.builder()
-            .merchant(transactioEntity.getMerchant())
-            .amount(transactioEntity.getAmount())
-            .time(transactioEntity.getTime())
+            .merchant(transactionEntity.getMerchant())
+            .amount(transactionEntity.getAmount())
+            .time(transactionEntity.getTime())
             .build();
     }
 

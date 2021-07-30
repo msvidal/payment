@@ -24,7 +24,7 @@ public class AccountRepositoryImpl implements AccountRepository {
     }
 
     @Override
-    public AccountEntity save(final AccountEntity accountEntity) {
+    public AccountEntity save(AccountEntity accountEntity) {
         accountEntity.setId(AccountPortImpl.ID_ACCOUNT);
         repository.put(accountEntity.getId(),accountEntity);
         return accountEntity;
@@ -36,7 +36,7 @@ public class AccountRepositoryImpl implements AccountRepository {
     }
 
     @Override
-    public AccountEntity findById(final Integer id) {
+    public AccountEntity findById(Integer id) {
         return repository.get(id);
     }
 

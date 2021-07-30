@@ -1,6 +1,5 @@
-FROM adoptopenjdk/openjdk11:alpine
-RUN addgroup -S spring && adduser -S spring -G spring
-USER spring:spring
-ARG JAR_FILE=target/*.jar
-COPY ${JAR_FILE} app.jar
-ENTRYPOINT ["java","-jar","/app.jar"]
+FROM adoptopenjdk/openjdk11:ubi
+RUN mkdir /opt/app
+COPY target/payment-0.0.1-SNAPSHOT-spring-boot.jar /opt/app
+CMD ["java", "-jar", "/opt/app/payment-0.0.1-SNAPSHOT-spring-boot.jar"]
+

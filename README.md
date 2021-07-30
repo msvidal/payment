@@ -1,19 +1,33 @@
-# Getting Started
+## Payment App
 
-./mvnw spring-boot:build-image -Dspring-boot.build-image.imageName=msvidal/spring-boot-docker
+App desenvolvido para processar transaçoes de pagamentos.
 
-docker run -p 8080:8080 docker.io/msvidal/spring-boot-docker:latest 
+## IDE
+- IntelliJ
 
-curl --location --request POST 'http://localhost:8080/v1/account' \
---header 'Content-Type: application/json' \
---data-raw '{ "active-card": "true", "available-limit": 10 }'
+## Pré requisitos
+- Java 11
+- Maven
+- Docker
 
-curl --location --request POST 'http://localhost:8080/v1/transaction' \
---header 'Content-Type: application/json' \
---data-raw '{
-  "merchant": "Paozinho 3",
-  "amount": 5,
-  "time": "2019-02-13T10:00:00.000Z"
-}'
+## Frameworks
+- Lombok
+- Jackson
+- Junit
+- Mockito
 
+## Rodando os testes unitários
 
+(No diretório do projeto):
+```shell
+$ mvn clean install
+```
+
+## Rodando a app no terminal
+
+(No diretório do projeto e considerando que o arquivo "operations" vai esta na mesma pasta do jar):
+```shell
+$ java -jar target/payment-0.0.1-spring-boot.jar < operations
+```
+
+❯                                                                                                                                        ─╯

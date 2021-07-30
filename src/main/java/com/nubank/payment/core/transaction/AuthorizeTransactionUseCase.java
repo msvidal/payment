@@ -7,7 +7,7 @@ import com.nubank.payment.core.account.AccountNotInitializedValidation;
 import com.nubank.payment.entrypoint.port.AccountPortImpl;
 import com.nubank.payment.entrypoint.port.TransactionPortImpl;
 
-public class CreateTransactionUseCase {
+public class AuthorizeTransactionUseCase {
 
     private final TransactionPort transactionPort;
 
@@ -23,7 +23,7 @@ public class CreateTransactionUseCase {
 
     private final DoubleTransactionValidation doubleTransactionValidation;
 
-    public CreateTransactionUseCase() {
+    public AuthorizeTransactionUseCase() {
         this.transactionPort = new TransactionPortImpl();
         this.accountPort = new AccountPortImpl();
         this.accountNotInitializedValidation = new AccountNotInitializedValidation();

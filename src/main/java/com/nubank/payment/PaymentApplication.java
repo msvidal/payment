@@ -2,7 +2,7 @@ package com.nubank.payment;
 
 import com.nubank.payment.core.account.Account;
 import com.nubank.payment.core.account.CreateAccountUseCase;
-import com.nubank.payment.core.transaction.CreateTransactionUseCase;
+import com.nubank.payment.core.transaction.AuthorizeTransactionUseCase;
 import com.nubank.payment.core.transaction.Transaction;
 import com.nubank.payment.entrypoint.Utils;
 import com.nubank.payment.entrypoint.dto.AccountResponse;
@@ -44,7 +44,7 @@ public class PaymentApplication {
 					.time(transactionRequest.getTransactionData().getTime())
 					.build();
 
-				var account = new CreateTransactionUseCase().execute(transaction);
+				var account = new AuthorizeTransactionUseCase().execute(transaction);
 
 				AccountResponse.parseJson(account);
 			}

@@ -3,14 +3,12 @@ package com.nubank.payment.entrypoint.port;
 import com.nubank.payment.core.account.Account;
 import com.nubank.payment.entrypoint.database.repository.AccountRepositoryImpl;
 import com.nubank.payment.entrypoint.database.entity.AccountEntity;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -28,7 +26,6 @@ public class AccountPortTest {
     private AccountRepositoryImpl accountRepositoryImpl;
 
     private AccountEntity accountEntity;
-
     private Account account;
 
     @BeforeEach

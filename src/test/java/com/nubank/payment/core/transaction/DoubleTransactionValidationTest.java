@@ -1,24 +1,28 @@
-package com.nubank.payment.entrypoint.port;
+package com.nubank.payment.core.transaction;
 
-import com.nubank.payment.core.transaction.Transaction;
+import com.nubank.payment.core.account.Account;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
+
 import java.time.LocalDateTime;
+
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 @ExtendWith(MockitoExtension.class)
-public class TransactionPortTest {
+public class DoubleTransactionValidationTest {
 
     @InjectMocks
-    private TransactionPortImpl transactionPort;
+    private DoubleTransactionValidation doubleTransactionValidation;
+
+    private Account account;
 
     private Transaction transaction;
 
     @BeforeEach
-    void init() {
+    void init(){
         transaction = Transaction.builder()
             .merchant("Startup")
             .amount(100)
@@ -27,16 +31,9 @@ public class TransactionPortTest {
     }
 
     @Test
-    void should_authorize() {
+    void should_validate(){
         assertDoesNotThrow(() -> {
-            transactionPort.authorize(transaction);
-        });
-    }
-
-    @Test
-    void should_findAll() {
-        assertDoesNotThrow(() -> {
-            transactionPort.findAll();
+            doubleTransactionValidation.validate(transaction);
         });
     }
 }

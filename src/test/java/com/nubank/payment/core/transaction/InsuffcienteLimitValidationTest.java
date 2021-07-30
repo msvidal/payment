@@ -1,24 +1,36 @@
-package com.nubank.payment.entrypoint.port;
+package com.nubank.payment.core.transaction;
 
+import com.nubank.payment.core.account.Account;
+import com.nubank.payment.core.transaction.InsufficienteLimitValidation;
 import com.nubank.payment.core.transaction.Transaction;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
+
 import java.time.LocalDateTime;
+
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 @ExtendWith(MockitoExtension.class)
-public class TransactionPortTest {
+public class InsuffcienteLimitValidationTest {
 
     @InjectMocks
-    private TransactionPortImpl transactionPort;
+    private InsufficienteLimitValidation insufficienteLimitValidation;
+
+    private Account account;
 
     private Transaction transaction;
 
     @BeforeEach
-    void init() {
+    void init(){
+        account = Account.builder()
+            .id(1)
+            .activeCard(true)
+            .availableLimit(50)
+            .build();
+
         transaction = Transaction.builder()
             .merchant("Startup")
             .amount(100)
@@ -27,16 +39,9 @@ public class TransactionPortTest {
     }
 
     @Test
-    void should_authorize() {
+    void should_validate(){
         assertDoesNotThrow(() -> {
-            transactionPort.authorize(transaction);
-        });
-    }
-
-    @Test
-    void should_findAll() {
-        assertDoesNotThrow(() -> {
-            transactionPort.findAll();
+            insufficienteLimitValidation.validate(account,transaction);
         });
     }
 }

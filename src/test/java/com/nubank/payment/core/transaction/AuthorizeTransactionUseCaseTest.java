@@ -1,24 +1,31 @@
-package com.nubank.payment.entrypoint.port;
+package com.nubank.payment.core.transaction;
 
-import com.nubank.payment.core.transaction.Transaction;
+import com.nubank.payment.entrypoint.port.AccountPortImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
 import java.time.LocalDateTime;
+
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @ExtendWith(MockitoExtension.class)
-public class TransactionPortTest {
+public class AuthorizeTransactionUseCaseTest {
 
     @InjectMocks
-    private TransactionPortImpl transactionPort;
+    private AuthorizeTransactionUseCase authorizeTransactionUseCase;
+
+    @Mock
+    private AccountPortImpl accountPort;
 
     private Transaction transaction;
 
     @BeforeEach
-    void init() {
+    void init(){
         transaction = Transaction.builder()
             .merchant("Startup")
             .amount(100)
@@ -27,16 +34,10 @@ public class TransactionPortTest {
     }
 
     @Test
-    void should_authorize() {
+    void should_create_account_execute(){
         assertDoesNotThrow(() -> {
-            transactionPort.authorize(transaction);
-        });
-    }
-
-    @Test
-    void should_findAll() {
-        assertDoesNotThrow(() -> {
-            transactionPort.findAll();
+            var response = authorizeTransactionUseCase.execute(transaction);
+            assertNotNull(response);
         });
     }
 }

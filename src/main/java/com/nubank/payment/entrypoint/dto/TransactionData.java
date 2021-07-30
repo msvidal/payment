@@ -1,15 +1,11 @@
 package com.nubank.payment.entrypoint.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
-@Builder
-@Getter
-@AllArgsConstructor
 @NoArgsConstructor
+@Getter
 public class TransactionData {
 
     private String merchant;

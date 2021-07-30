@@ -1,16 +1,12 @@
 package com.nubank.payment.entrypoint.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 
-@Builder
-@Getter
-@AllArgsConstructor
 @NoArgsConstructor
+@Getter
 public class TransactionRequest {
 
     @JsonProperty("transaction")

@@ -30,4 +30,13 @@ $ mvn clean install
 $ java -jar target/payment-0.0.1-spring-boot.jar < operations
 ```
 
-❯                                                                                                                                        ─╯
+## Rodando a app no docker
+
+(No diretório do projeto):
+
+passo 1
+```shell
+$ docker build -t docker-payment .
+```
+
+─╯

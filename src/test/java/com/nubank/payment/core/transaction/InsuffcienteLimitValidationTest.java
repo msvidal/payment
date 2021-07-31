@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 @ExtendWith(MockitoExtension.class)
-public class InsuffcienteLimitValidationTest {
+class InsuffcienteLimitValidationTest {
 
     @InjectMocks
     private InsufficienteLimitValidation insufficienteLimitValidation;

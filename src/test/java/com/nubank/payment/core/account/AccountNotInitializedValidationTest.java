@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.mockito.Mockito.lenient;
 
 @ExtendWith(MockitoExtension.class)
-public class AccountNotInitializedValidationTest {
+class AccountNotInitializedValidationTest {
 
     @InjectMocks
     private AccountNotInitializedValidation accountNotInitializedValidation;

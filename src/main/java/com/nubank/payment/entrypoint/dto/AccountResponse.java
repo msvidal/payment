@@ -1,5 +1,6 @@
 package com.nubank.payment.entrypoint.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.nubank.payment.core.ValidationFactory;
@@ -17,6 +18,7 @@ import java.util.Optional;
 @AllArgsConstructor
 @Getter
 @Builder
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class AccountResponse {
 
     @JsonProperty("account")
@@ -32,7 +34,7 @@ public class AccountResponse {
                     .activeCard(account.getActiveCard())
                     .availableLimit(account.getAvailableLimit())
                     .build()).orElse(AccountResponseData.builder().build()))
-                .violations(ValidationFactory.getInstance().getValidations()).build();
+                .violations(account.getValidations()).build();
 
             ValidationFactory.getInstance().invalidate();
 

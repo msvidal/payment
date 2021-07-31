@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 @ExtendWith(MockitoExtension.class)
-public class HighFrequencyValidationTest {
+class HighFrequencyValidationTest {
 
     @InjectMocks
     private HighFrequencyValidation highFrequencyValidation;

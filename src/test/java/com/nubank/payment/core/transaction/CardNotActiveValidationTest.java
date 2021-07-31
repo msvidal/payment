@@ -12,7 +12,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 @ExtendWith(MockitoExtension.class)
-public class CardNotActiveValidationTest {
+class CardNotActiveValidationTest {
 
     @InjectMocks
     private CardNotActiveValidation cardNotActiveValidation;

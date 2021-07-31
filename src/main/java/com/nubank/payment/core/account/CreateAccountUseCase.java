@@ -1,8 +1,8 @@
 package com.nubank.payment.core.account;
 
-import com.nubank.payment.core.ValidationFactory;
+import com.nubank.payment.core.PaymentUseCase;
 
-public class CreateAccountUseCase {
+public class CreateAccountUseCase extends PaymentUseCase {
 
     private final AccountPort accountPort;
 
@@ -12,11 +12,11 @@ public class CreateAccountUseCase {
 
     public Account execute(Account account) {
 
-        var accountExist = accountPort.find();
+        new AccountAlreadyInitializedValidation().validate();
 
-        if (accountExist != null) {
-            ValidationFactory.getInstance().addValidation("account-already-initialized");
-            return accountExist;
+        if (!isEmptyValidations()) {
+            account.setValidations(getValidations());
+            return account;
         }
 
         return accountPort.save(account);

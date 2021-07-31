@@ -8,6 +8,9 @@ import com.nubank.payment.entrypoint.dto.TransactionRequest;
 
 public class Utils {
 
+    private Utils() {
+    }
+
     public static AccountRequest getAccount(String line) {
         try {
             return getObjectMapper().readValue(line, AccountRequest.class);

@@ -7,10 +7,9 @@ import java.util.List;
 public class ValidationFactory
 {
     private static ValidationFactory instance = null;
-    private static List<String> violations;
+    private static List<String> violations = new ArrayList<>();
 
     private ValidationFactory() {
-        violations = new ArrayList();
     }
 
     public static ValidationFactory getInstance()
@@ -29,6 +28,6 @@ public class ValidationFactory
     }
 
     public void invalidate(){
-        violations = new ArrayList();
+        violations = new ArrayList<>();
     }
 }

@@ -6,6 +6,8 @@ import com.nubank.payment.entrypoint.database.repository.AccountRepository;
 import com.nubank.payment.entrypoint.database.entity.AccountEntity;
 import com.nubank.payment.entrypoint.database.repository.AccountRepositoryImpl;
 
+import java.util.Optional;
+
 public class AccountPortImpl implements AccountPort {
 
     public static final Integer ID_ACCOUNT = 1;
@@ -40,16 +42,15 @@ public class AccountPortImpl implements AccountPort {
 
     @Override
     public Account find() {
+
         var accountEntity = repository.findById(ID_ACCOUNT);
 
-        if(accountEntity != null){
+        return Optional.ofNullable(accountEntity).map(accountEntity1 -> {
             return Account.builder()
                 .id(accountEntity.getId())
                 .activeCard(accountEntity.getActiveCard())
                 .availableLimit(accountEntity.getAvailableLimit())
                 .build();
-        }
-
-        return null;
+        }).orElse(null);
     }
 }

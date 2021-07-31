@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.lenient;
 
 @ExtendWith(MockitoExtension.class)
-public class CreateAccountUseCaseTest {
+class CreateAccountUseCaseTest {
 
     @InjectMocks
     private CreateAccountUseCase createAccountUseCase;

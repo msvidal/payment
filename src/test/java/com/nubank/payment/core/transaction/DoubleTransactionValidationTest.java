@@ -12,12 +12,10 @@ import java.time.LocalDateTime;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 @ExtendWith(MockitoExtension.class)
-public class DoubleTransactionValidationTest {
+class DoubleTransactionValidationTest {
 
     @InjectMocks
     private DoubleTransactionValidation doubleTransactionValidation;
-
-    private Account account;
 
     private Transaction transaction;
 

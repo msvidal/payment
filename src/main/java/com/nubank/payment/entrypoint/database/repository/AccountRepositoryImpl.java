@@ -10,10 +10,9 @@ public class AccountRepositoryImpl implements AccountRepository {
 
     private static AccountRepositoryImpl instance = null;
 
-    private static Map<Integer,AccountEntity> repository;
+    private static Map<Integer,AccountEntity> repository = new HashMap<>();
 
     private AccountRepositoryImpl() {
-        repository = new HashMap<>();
     }
 
     public static AccountRepository getInstance()

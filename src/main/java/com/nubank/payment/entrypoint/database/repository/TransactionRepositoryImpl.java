@@ -12,10 +12,9 @@ public class TransactionRepositoryImpl implements TransactionRepository {
 
     private static TransactionRepositoryImpl instance = null;
 
-    private static Map<Integer,TransactionEntity> repository;
+    private static Map<Integer,TransactionEntity> repository = new HashMap<>();
 
     private TransactionRepositoryImpl() {
-        repository = new HashMap<>();
     }
 
     public static TransactionRepository getInstance()

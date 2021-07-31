@@ -1,11 +1,11 @@
 package com.nubank.payment.core.transaction;
 
-import com.nubank.payment.core.ValidationFactory;
+import com.nubank.payment.core.PaymentUseCase;
 import com.nubank.payment.core.account.Account;
 import com.nubank.payment.core.account.AccountPort;
 import com.nubank.payment.core.account.AccountNotInitializedValidation;
 
-public class AuthorizeTransactionUseCase {
+public class AuthorizeTransactionUseCase extends PaymentUseCase {
 
     private final TransactionPort transactionPort;
 
@@ -37,26 +37,32 @@ public class AuthorizeTransactionUseCase {
     }
 
     public Account execute(Transaction transaction) {
+        Account account;
 
         accountNotInitializedValidation.validate();
 
-        var account = accountPort.find();
+        if(!isEmptyValidations()) {
+            account = new Account();
+            account.setValidations(getValidations());
+            return account;
+        }
+
+        account = accountPort.find();
 
         cardNotActiveValidation.validate(account);
-
         insufficienteLimitValidation.validate(account,transaction);
-
         highFrequencyValidation.validate(transaction);
-
         doubleTransactionValidation.validate(transaction);
 
-        if(account != null && ValidationFactory.getInstance().getValidations().size() == 0) {
+        if(account != null && isEmptyValidations()) {
 
             account.setAvailableLimit(account.getAvailableLimit() - transaction.getAmount());
             account = accountPort.save(account);
             transactionPort.authorize(transaction);
             return account;
         }
+
+        account.setValidations(getValidations());
 
         return account;
     }

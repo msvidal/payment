@@ -15,9 +15,7 @@ import java.time.LocalDateTime;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.lenient;
-import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class CreateAccountUseCaseTest {
@@ -53,9 +51,9 @@ public class CreateAccountUseCaseTest {
     @Test
     void should_create_account_execute(){
 
-        when(accountPort.find()).thenReturn(account);
+        lenient().when(accountPort.find()).thenReturn(account);
         lenient().when(accountPort.save(account)).thenReturn(account);
-        doNothing().when(accountAlreadyInitializedValidation).validate(account);
+        lenient().doNothing().when(accountAlreadyInitializedValidation).validate(account);
 
         assertDoesNotThrow(() -> {
             var response = createAccountUseCase.execute(account);

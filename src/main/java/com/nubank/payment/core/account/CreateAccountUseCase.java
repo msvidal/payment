@@ -1,7 +1,6 @@
 package com.nubank.payment.core.account;
 
 import com.nubank.payment.core.ValidationFactory;
-import com.nubank.payment.entrypoint.port.AccountPortImpl;
 
 public class CreateAccountUseCase {
 
@@ -11,7 +10,7 @@ public class CreateAccountUseCase {
 
     public CreateAccountUseCase(final AccountPort accountPort,
         final AccountAlreadyInitializedValidation accountAlreadyInitializedValidation) {
-        this.accountPort = new AccountPortImpl();
+        this.accountPort = accountPort;
         this.accountAlreadyInitializedValidation = accountAlreadyInitializedValidation;
     }
 

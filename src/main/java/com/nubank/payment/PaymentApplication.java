@@ -1,7 +1,6 @@
 package com.nubank.payment;
 
 import com.nubank.payment.core.account.Account;
-import com.nubank.payment.core.account.AccountAlreadyInitializedValidation;
 import com.nubank.payment.core.account.AccountNotInitializedValidation;
 import com.nubank.payment.core.account.CreateAccountUseCase;
 import com.nubank.payment.core.transaction.AuthorizeTransactionUseCase;
@@ -60,7 +59,7 @@ public class PaymentApplication {
 	}
 
 	private static CreateAccountUseCase getCreateAccountUseCase(){
-		return new CreateAccountUseCase(new AccountPortImpl(), new AccountAlreadyInitializedValidation());
+		return new CreateAccountUseCase(new AccountPortImpl());
 	}
 
 	private static AuthorizeTransactionUseCase getAuthorizeTransactionUseCase(){

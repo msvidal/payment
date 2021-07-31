@@ -6,22 +6,17 @@ public class CreateAccountUseCase {
 
     private final AccountPort accountPort;
 
-    private final AccountAlreadyInitializedValidation accountAlreadyInitializedValidation;
-
-    public CreateAccountUseCase(final AccountPort accountPort,
-        final AccountAlreadyInitializedValidation accountAlreadyInitializedValidation) {
+    public CreateAccountUseCase(final AccountPort accountPort) {
         this.accountPort = accountPort;
-        this.accountAlreadyInitializedValidation = accountAlreadyInitializedValidation;
     }
 
     public Account execute(Account account) {
 
-        var accountFind = accountPort.find();
+        var accountExist = accountPort.find();
 
-        accountAlreadyInitializedValidation.validate(account);
-
-        if(!ValidationFactory.getInstance().getValidations().isEmpty()){
-            return accountFind;
+        if (accountExist != null) {
+            ValidationFactory.getInstance().addValidation("account-already-initialized");
+            return accountExist;
         }
 
         return accountPort.save(account);

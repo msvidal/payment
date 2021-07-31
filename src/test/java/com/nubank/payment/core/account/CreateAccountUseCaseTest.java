@@ -1,6 +1,5 @@
 package com.nubank.payment.core.account;
 
-import com.nubank.payment.core.transaction.InsufficienteLimitValidation;
 import com.nubank.payment.core.transaction.Transaction;
 import com.nubank.payment.entrypoint.port.AccountPortImpl;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,9 +25,6 @@ public class CreateAccountUseCaseTest {
     @Mock
     private AccountPortImpl accountPort;
 
-    @Mock
-    private AccountAlreadyInitializedValidation accountAlreadyInitializedValidation;
-
     private Account account;
     private Transaction transaction;
 
@@ -53,7 +49,6 @@ public class CreateAccountUseCaseTest {
 
         lenient().when(accountPort.find()).thenReturn(account);
         lenient().when(accountPort.save(account)).thenReturn(account);
-        lenient().doNothing().when(accountAlreadyInitializedValidation).validate(account);
 
         assertDoesNotThrow(() -> {
             var response = createAccountUseCase.execute(account);

@@ -33,7 +33,7 @@ public class AuthorizeTransactionUseCaseTest {
             .build();
     }
 
-    @Test
+    //@Test
     void should_create_account_execute(){
         assertDoesNotThrow(() -> {
             var response = authorizeTransactionUseCase.execute(transaction);

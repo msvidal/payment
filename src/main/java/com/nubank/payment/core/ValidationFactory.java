@@ -7,7 +7,7 @@ import java.util.List;
 public class ValidationFactory
 {
     private static ValidationFactory instance = null;
-    private static ArrayList violations;
+    private static List<String> violations;
 
     private ValidationFactory() {
         violations = new ArrayList();

@@ -4,8 +4,6 @@ import com.nubank.payment.core.ValidationFactory;
 import com.nubank.payment.core.account.Account;
 import com.nubank.payment.core.account.AccountPort;
 import com.nubank.payment.core.account.AccountNotInitializedValidation;
-import com.nubank.payment.entrypoint.port.AccountPortImpl;
-import com.nubank.payment.entrypoint.port.TransactionPortImpl;
 
 public class AuthorizeTransactionUseCase {
 
@@ -23,14 +21,19 @@ public class AuthorizeTransactionUseCase {
 
     private final DoubleTransactionValidation doubleTransactionValidation;
 
-    public AuthorizeTransactionUseCase() {
-        this.transactionPort = new TransactionPortImpl();
-        this.accountPort = new AccountPortImpl();
-        this.accountNotInitializedValidation = new AccountNotInitializedValidation();
-        this.cardNotActiveValidation = new CardNotActiveValidation();
-        this.insufficienteLimitValidation = new InsufficienteLimitValidation();
-        this.highFrequencyValidation = new HighFrequencyValidation();
-        this.doubleTransactionValidation = new DoubleTransactionValidation();
+    public AuthorizeTransactionUseCase(final TransactionPort transactionPort, final AccountPort accountPort,
+        final AccountNotInitializedValidation accountNotInitializedValidation,
+        final CardNotActiveValidation cardNotActiveValidation,
+        final InsufficienteLimitValidation insufficienteLimitValidation,
+        final HighFrequencyValidation highFrequencyValidation,
+        final DoubleTransactionValidation doubleTransactionValidation) {
+        this.transactionPort = transactionPort;
+        this.accountPort = accountPort;
+        this.accountNotInitializedValidation = accountNotInitializedValidation;
+        this.cardNotActiveValidation = cardNotActiveValidation;
+        this.insufficienteLimitValidation = insufficienteLimitValidation;
+        this.highFrequencyValidation = highFrequencyValidation;
+        this.doubleTransactionValidation = doubleTransactionValidation;
     }
 
     public Account execute(Transaction transaction) {
@@ -47,14 +50,12 @@ public class AuthorizeTransactionUseCase {
 
         doubleTransactionValidation.validate(transaction);
 
-        if(ValidationFactory.getInstance().getValidations().size() == 0) {
+        if(account != null && ValidationFactory.getInstance().getValidations().size() == 0) {
 
-            if (account != null) {
-                account.setAvailableLimit(account.getAvailableLimit() - transaction.getAmount());
-                account = accountPort.save(account);
-            }
-
+            account.setAvailableLimit(account.getAvailableLimit() - transaction.getAmount());
+            account = accountPort.save(account);
             transactionPort.authorize(transaction);
+            return account;
         }
 
         return account;

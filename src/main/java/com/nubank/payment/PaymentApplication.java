@@ -1,11 +1,19 @@
 package com.nubank.payment;
 
 import com.nubank.payment.core.account.Account;
+import com.nubank.payment.core.account.AccountAlreadyInitializedValidation;
+import com.nubank.payment.core.account.AccountNotInitializedValidation;
 import com.nubank.payment.core.account.CreateAccountUseCase;
 import com.nubank.payment.core.transaction.AuthorizeTransactionUseCase;
+import com.nubank.payment.core.transaction.CardNotActiveValidation;
+import com.nubank.payment.core.transaction.DoubleTransactionValidation;
+import com.nubank.payment.core.transaction.HighFrequencyValidation;
+import com.nubank.payment.core.transaction.InsufficienteLimitValidation;
 import com.nubank.payment.core.transaction.Transaction;
 import com.nubank.payment.entrypoint.Utils;
 import com.nubank.payment.entrypoint.dto.AccountResponse;
+import com.nubank.payment.entrypoint.port.AccountPortImpl;
+import com.nubank.payment.entrypoint.port.TransactionPortImpl;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -31,7 +39,7 @@ public class PaymentApplication {
 					.availableLimit(accountRequest.getAccountData().getAvailableLimit())
 					.build();
 
-				account = new CreateAccountUseCase().execute(account);
+				account = getCreateAccountUseCase().execute(account);
 				AccountResponse.parseJson(account);
 
 			}
@@ -44,10 +52,20 @@ public class PaymentApplication {
 					.time(transactionRequest.getTransactionData().getTime())
 					.build();
 
-				var account = new AuthorizeTransactionUseCase().execute(transaction);
+				var account = getAuthorizeTransactionUseCase().execute(transaction);
 
 				AccountResponse.parseJson(account);
 			}
 		}
 	}
+
+	private static CreateAccountUseCase getCreateAccountUseCase(){
+		return new CreateAccountUseCase(new AccountPortImpl(), new AccountAlreadyInitializedValidation());
+	}
+
+	private static AuthorizeTransactionUseCase getAuthorizeTransactionUseCase(){
+		return new AuthorizeTransactionUseCase(new TransactionPortImpl(), new AccountPortImpl(), new AccountNotInitializedValidation(),
+			new CardNotActiveValidation(),new InsufficienteLimitValidation(), new HighFrequencyValidation(), new DoubleTransactionValidation());
+	}
+
 }

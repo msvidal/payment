@@ -1,7 +1,7 @@
 package com.nubank.payment.core.transaction;
 
-import com.nubank.payment.core.ValidationFactory;
-import com.nubank.payment.entrypoint.port.TransactionPortImpl;
+import com.nubank.payment.core.ValidationSingleton;
+import com.nubank.payment.entrypoint.port.PortFactory;
 
 import java.time.Duration;
 
@@ -12,7 +12,7 @@ public class DoubleTransactionValidation {
     private final TransactionPort transactionPort;
 
     public DoubleTransactionValidation() {
-        this.transactionPort = new TransactionPortImpl();
+        this.transactionPort = new PortFactory().createTransactionPort();
     }
 
     public void validate(Transaction transaction) {
@@ -25,7 +25,7 @@ public class DoubleTransactionValidation {
             .findFirst().map(transaction1 -> {
                 Duration duration = Duration.between(transaction1.getTime(), transaction.getTime());
                 if(Math.abs(duration.toMinutes()) < MAX_INTERVAL_TRANSACTION_MINUTE) {
-                    ValidationFactory.getInstance().addValidation("doubled-transaction");
+                    ValidationSingleton.getInstance().addValidation("doubled-transaction");
                 }
             return null;
         });

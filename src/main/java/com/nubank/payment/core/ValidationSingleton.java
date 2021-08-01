@@ -4,18 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class ValidationFactory
+public class ValidationSingleton
 {
-    private static ValidationFactory instance = null;
+    private static ValidationSingleton instance = null;
     private static List<String> violations = new ArrayList<>();
 
-    private ValidationFactory() {
+    private ValidationSingleton() {
     }
 
-    public static ValidationFactory getInstance()
+    public static ValidationSingleton getInstance()
     {
         if (instance == null)
-            instance = new ValidationFactory();
+            instance = new ValidationSingleton();
         return instance;
     }
 

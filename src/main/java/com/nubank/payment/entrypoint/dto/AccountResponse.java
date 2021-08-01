@@ -3,7 +3,7 @@ package com.nubank.payment.entrypoint.dto;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.nubank.payment.core.ValidationFactory;
+import com.nubank.payment.core.ValidationSingleton;
 import com.nubank.payment.core.account.Account;
 import com.nubank.payment.entrypoint.Utils;
 import lombok.AllArgsConstructor;
@@ -36,7 +36,7 @@ public class AccountResponse {
                     .build()).orElse(AccountResponseData.builder().build()))
                 .violations(account.getValidations()).build();
 
-            ValidationFactory.getInstance().invalidate();
+            ValidationSingleton.getInstance().invalidate();
 
             System.out.println(Utils.getObjectMapper().writeValueAsString(accountResponse));
 

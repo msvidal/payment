@@ -2,9 +2,9 @@ package com.nubank.payment.entrypoint.port;
 
 import com.nubank.payment.core.transaction.Transaction;
 import com.nubank.payment.core.transaction.TransactionPort;
+import com.nubank.payment.entrypoint.database.DatabaseFactory;
 import com.nubank.payment.entrypoint.database.repository.TransactionRepository;
 import com.nubank.payment.entrypoint.database.entity.TransactionEntity;
-import com.nubank.payment.entrypoint.database.repository.TransactionRepositoryImpl;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,7 +14,7 @@ public class TransactionPortImpl implements TransactionPort {
     private final TransactionRepository transactionRepository;
 
     public TransactionPortImpl() {
-        this.transactionRepository = TransactionRepositoryImpl.getInstance();
+        this.transactionRepository = new DatabaseFactory().createTransactionRepository();
     }
 
     @Override

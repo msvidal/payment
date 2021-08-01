@@ -1,19 +1,19 @@
 package com.nubank.payment.core.account;
 
-import com.nubank.payment.core.ValidationFactory;
-import com.nubank.payment.entrypoint.port.AccountPortImpl;
+import com.nubank.payment.core.ValidationSingleton;
+import com.nubank.payment.entrypoint.port.PortFactory;
 
 public class AccountAlreadyInitializedValidation {
 
     private final AccountPort accountPort;
 
     public AccountAlreadyInitializedValidation() {
-        this.accountPort = new AccountPortImpl();
+        this.accountPort = new PortFactory().createAccountPort();
     }
 
     public void validate() {
         if(accountPort.checkIfAccountAlreadyExists()){
-            ValidationFactory.getInstance().addValidation("account-already-initialized");
+            ValidationSingleton.getInstance().addValidation("account-already-initialized");
         }
     }
 }

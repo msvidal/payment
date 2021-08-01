@@ -1,7 +1,7 @@
 package com.nubank.payment.entrypoint.database.repository;
 
+import com.nubank.payment.core.account.AccountPort;
 import com.nubank.payment.entrypoint.database.entity.AccountEntity;
-import com.nubank.payment.entrypoint.port.AccountPortImpl;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,7 +24,7 @@ public class AccountRepositoryImpl implements AccountRepository {
 
     @Override
     public AccountEntity save(AccountEntity accountEntity) {
-        accountEntity.setId(AccountPortImpl.ID_ACCOUNT);
+        accountEntity.setId(AccountPort.ID_ACCOUNT);
         repository.put(accountEntity.getId(),accountEntity);
         return accountEntity;
     }

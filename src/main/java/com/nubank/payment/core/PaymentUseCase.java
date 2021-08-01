@@ -5,10 +5,10 @@ import java.util.List;
 public class PaymentUseCase {
 
     protected boolean isEmptyValidations(){
-        return ValidationFactory.getInstance().getValidations().isEmpty();
+        return ValidationSingleton.getInstance().getValidations().isEmpty();
     }
 
     protected List<String> getValidations(){
-        return ValidationFactory.getInstance().getValidations();
+        return ValidationSingleton.getInstance().getValidations();
     }
 }

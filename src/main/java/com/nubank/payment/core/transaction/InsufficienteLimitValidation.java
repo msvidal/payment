@@ -1,6 +1,6 @@
 package com.nubank.payment.core.transaction;
 
-import com.nubank.payment.core.ValidationFactory;
+import com.nubank.payment.core.ValidationSingleton;
 import com.nubank.payment.core.account.Account;
 
 public class InsufficienteLimitValidation {
@@ -9,7 +9,7 @@ public class InsufficienteLimitValidation {
         if (account == null) return;
 
         if(transaction.getAmount() > account.getAvailableLimit()) {
-            ValidationFactory.getInstance().addValidation("insufficient-limit");
+            ValidationSingleton.getInstance().addValidation("insufficient-limit");
         }
     }
 }

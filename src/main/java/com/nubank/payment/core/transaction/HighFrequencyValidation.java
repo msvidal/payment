@@ -1,7 +1,7 @@
 package com.nubank.payment.core.transaction;
 
-import com.nubank.payment.core.ValidationFactory;
-import com.nubank.payment.entrypoint.port.TransactionPortImpl;
+import com.nubank.payment.core.ValidationSingleton;
+import com.nubank.payment.entrypoint.port.PortFactory;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -14,7 +14,7 @@ public class HighFrequencyValidation {
     private final TransactionPort transactionPort;
 
     public HighFrequencyValidation() {
-        this.transactionPort = new TransactionPortImpl();
+        this.transactionPort = new PortFactory().createTransactionPort();
     }
 
     public void validate(Transaction transaction) {
@@ -27,7 +27,7 @@ public class HighFrequencyValidation {
         }).count();
 
         if(filterCount == MAX_HIGH_FREQUENCY){
-            ValidationFactory.getInstance().addValidation("high-frequency-small-interval");
+            ValidationSingleton.getInstance().addValidation("high-frequency-small-interval");
         }
     }
 

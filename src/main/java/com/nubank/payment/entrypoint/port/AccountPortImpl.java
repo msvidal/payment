@@ -2,19 +2,18 @@ package com.nubank.payment.entrypoint.port;
 
 import com.nubank.payment.core.account.Account;
 import com.nubank.payment.core.account.AccountPort;
+import com.nubank.payment.entrypoint.database.DatabaseFactory;
 import com.nubank.payment.entrypoint.database.repository.AccountRepository;
 import com.nubank.payment.entrypoint.database.entity.AccountEntity;
-import com.nubank.payment.entrypoint.database.repository.AccountRepositoryImpl;
 
 import java.util.Optional;
 
 public class AccountPortImpl implements AccountPort {
 
-    public static final Integer ID_ACCOUNT = 1;
     private AccountRepository repository;
 
     public AccountPortImpl() {
-        this.repository = AccountRepositoryImpl.getInstance();
+        this.repository = new DatabaseFactory().createAccountRepository();
     }
 
     @Override

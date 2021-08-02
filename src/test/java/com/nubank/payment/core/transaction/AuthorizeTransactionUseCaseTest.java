@@ -67,13 +67,13 @@ class AuthorizeTransactionUseCaseTest {
     @Test
     void should_create_account_execute(){
 
-        doNothing().when(accountNotInitializedValidation).validate();
-        when(accountPort.find()).thenReturn(account);
+        lenient().doNothing().when(accountNotInitializedValidation).validate();
+        lenient().when(accountPort.find()).thenReturn(account);
         lenient().doNothing().when(cardNotActiveValidation).validate(account);
-        doNothing().when(insufficienteLimitValidation).validate(account,transaction);
-        doNothing().when(cardNotActiveValidation).validate(account);
-        doNothing().when(highFrequencyValidation).validate(transaction);
-        doNothing().when(doubleTransactionValidation).validate(transaction);
+        lenient().doNothing().when(insufficienteLimitValidation).validate(account,transaction);
+        lenient().doNothing().when(cardNotActiveValidation).validate(account);
+        lenient().doNothing().when(highFrequencyValidation).validate(transaction);
+        lenient().doNothing().when(doubleTransactionValidation).validate(transaction);
         lenient().when(accountPort.save(account)).thenReturn(account);
         lenient().when(transactionPort.authorize(transaction)).thenReturn(transaction);
 

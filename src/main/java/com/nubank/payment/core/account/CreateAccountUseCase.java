@@ -1,6 +1,7 @@
 package com.nubank.payment.core.account;
 
 import com.nubank.payment.core.PaymentUseCase;
+import com.nubank.payment.core.ValidationSingleton;
 import com.nubank.payment.entrypoint.port.PortFactory;
 
 public class CreateAccountUseCase extends PaymentUseCase {
@@ -13,11 +14,12 @@ public class CreateAccountUseCase extends PaymentUseCase {
 
     public Account execute(Account account) {
 
-        new AccountAlreadyInitializedValidation().validate();
+        var accountFind = accountPort.find();
 
-        if (!isEmptyValidations()) {
-            account.setValidations(getValidations());
-            return account;
+        if (accountFind != null) {
+            ValidationSingleton.getInstance().addValidation("account-already-initialized");
+            accountFind.setValidations(getValidations());
+            return accountFind;
         }
 
         return accountPort.save(account);

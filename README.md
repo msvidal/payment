@@ -5,7 +5,7 @@ Segue as respostas dos questionamentos apresentados:
 
 Uma explicação sobre as decisões técnicas e arquiteturais do seu desafio
 
-R - Tinha visto uma apresentacao do pessoal da Nubank falando do uso do Hexagonal, como já uso
+R - Tinha visto uma apresentacao do pessoal da ... falando do uso do Hexagonal, como já uso
 no projeto que atuo hoje, tentei as boas práticas que o desenho já tem.
 
 Uma justificativa para o uso de frameworks ou bibliotecas
